@@ -11,7 +11,7 @@ class directed_test extends uvm_test;
 
   function void build_phase(uvm_phase phase);
     super.build_phase(phase);
-    `uvm_info("Random Test", "Build phase random test", UVM_HIGH)
+    `uvm_info("Directed Test", "Build phase directed test", UVM_HIGH)
     environment = env::type_id::create("env", this);
   endfunction
 
