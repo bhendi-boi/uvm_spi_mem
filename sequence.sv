@@ -76,4 +76,38 @@ class directed_seq extends uvm_sequence;
 
 endclass
 
+class error_seq extends uvm_sequence;
+  `uvm_object_utils(error_seq)
+
+  transaction tr;
+  int i;
+  function new(string name = "error_sequence");
+    super.new(name);
+    `uvm_info("Error sequence", "Constructed error sequence", UVM_HIGH)
+  endfunction
+
+  task body();
+    tr = transaction::type_id::create("tr");
+    i = 0;
+    for (i = 0; i < 10; i++) begin
+      // write transaction 
+      start_item(tr);
+      tr.randomize() with {
+        rst == 0;
+        addr > 32;
+        wr == 1;
+      };
+      finish_item(tr);
+      // read transaction 
+      start_item(tr);
+      tr.randomize() with {
+        rst == 0;
+        addr > 32;
+        wr == 0;
+      };
+      finish_item(tr);
+    end
+  endtask
+
+
 
