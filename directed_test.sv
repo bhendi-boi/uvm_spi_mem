@@ -24,7 +24,7 @@ class directed_test extends uvm_test;
     reset_sequence = reset_seq::type_id::create("reset");
     reset_sequence.start(environment.agent.sequencer);
     directed_sequence.start(environment.agent.sequencer);
-
+    #300;
     phase.drop_objection(this);
   endtask
 

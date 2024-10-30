@@ -17,6 +17,8 @@ import uvm_pkg::*;
 `include "coverage.sv"
 `include "env.sv"
 `include "directed_test.sv"
+`include "error_test.sv"
+`include "base_directed_test.sv"
 
 module tb;
 
