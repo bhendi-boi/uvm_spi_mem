@@ -5,6 +5,7 @@ class scb extends uvm_scoreboard;
   transaction trs[$];
   transaction tr;
   bit [7:0] mem[31:0] = '{default: 0};
+  int i = 0;
 
   function new(string name = "scb", uvm_component parent);
 
@@ -27,8 +28,10 @@ class scb extends uvm_scoreboard;
     forever begin
       wait (!(trs.size() == 0));
       tr = trs.pop_front();
+      i++;
       tr.print();
       compare(tr);
+      `uvm_info("Tr count",$sformatf("Tr count = %d",i),UVM_NONE)
     end
   endtask
 
