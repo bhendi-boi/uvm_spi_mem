@@ -53,7 +53,7 @@ class directed_seq extends uvm_sequence;
 
   task body();
     tr = transaction::type_id::create("tr");
-    i = 0;
+    i  = 0;
     for (i = 0; i < 32; i++) begin
       // write transaction 
       start_item(tr);
@@ -88,7 +88,7 @@ class error_seq extends uvm_sequence;
 
   task body();
     tr = transaction::type_id::create("tr");
-    i = 0;
+    i  = 0;
     for (i = 0; i < 10; i++) begin
       // write transaction 
       start_item(tr);
@@ -108,6 +108,4 @@ class error_seq extends uvm_sequence;
       finish_item(tr);
     end
   endtask
-
-
-
+endclass
