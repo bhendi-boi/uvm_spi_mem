@@ -13,6 +13,16 @@ class base_seq extends uvm_sequence;
     start_item(tr);
     tr.randomize() with {
       rst == 0;
+      addr == 3;
+      din == 130;
+      wr == 1;
+    };
+    finish_item(tr);
+    start_item(tr);
+    tr.randomize() with {
+      rst == 0;
+      addr == 3;
+      wr == 0;
     };
     finish_item(tr);
   endtask
