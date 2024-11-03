@@ -31,3 +31,37 @@ Design files taken from Udemy course
   - Start with writing and reading address by address.
 - ### Error Test
   - To ensure that err signal is being raised properly, make a different test which checks for err.
+
+### Commands
+
+#### Tool setup
+
+csh
+source /home/installs/cshrc
+source /home/ec5018_lab10/coverage.cshrc
+setenv UVM_HOME /home/uvm-1.2
+setenv UVM_HOME_LIB $XCELIUMHOME/tools.lnx86/methodology/UVM/CDNS-1.2/sv/lib/64bit
+
+#### Run Directed Test
+
+xrun -Q -unbuffered '-timescale' '1ns/1ns' '-sysv' '-access' '+rw' '+UVM_VERBOSITY=UVM_MEDIUM' '+UVM_TESTNAME=error_test' '-svseed' '2' -uvmnocdnsextra -uvmhome $UVM_HOME $UVM_HOME/src/uvm_macros.svh design.sv testbench.sv -coverage all -covoverwrite -covtest test_directed
+
+##### Generate report for directed test
+
+imc -batch -init imc.tcl
+
+#### Run Error Test
+
+xrun -Q -unbuffered '-timescale' '1ns/1ns' '-sysv' '-access' '+rw' '+UVM_VERBOSITY=UVM_MEDIUM' '+UVM_TESTNAME=error_test' '-svseed' '2' -uvmnocdnsextra -uvmhome $UVM_HOME $UVM_HOME/src/uvm_macros.svh design.sv testbench.sv -coverage all -covoverwrite -covtest test_error
+
+##### Merge reports
+
+imc -batch -init merge.tcl
+
+#### Run Base Directed test
+
+xrun -Q -unbuffered '-timescale' '1ns/1ns' '-sysv' '-access' '+rw' '+UVM_VERBOSITY=UVM_MEDIUM' '+UVM_TESTNAME=base_directed_test' '-svseed' '2' -uvmnocdnsextra -uvmhome $UVM_HOME $UVM_HOME/src/uvm_macros.svh design.sv testbench.sv -coverage all -covoverwrite -covtest test_base_directed
+
+##### Generate final merged report
+
+imc -gui -init merge_final.tcl
